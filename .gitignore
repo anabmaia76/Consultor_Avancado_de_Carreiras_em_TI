@@ -1,0 +1,26 @@
+
+# Ambiente virtual Python
+.venv/
+venv/
+
+# Configuracoes locais do PyCharm
+.idea/
+
+# Arquivos temporarios do Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Arquivos de testes e cache
+.pytest_cache/
+.coverage
+
+# Arquivos com configuracoes sensiveis
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Arquivos temporarios do sistema
+.DS_Store
+Thumbs.db
