@@ -1,0 +1,5 @@
+# Dependencias principais do Consultor Inteligente de Carreiras em TI
+streamlit==1.66.0
+experta==1.9.4
+# Versao exigida pelo Experta 1.9.4 (compatibilidade tratada em motor_inferencia.py)
+frozendict==1.2
