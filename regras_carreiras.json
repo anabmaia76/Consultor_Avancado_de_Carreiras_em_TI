@@ -1,0 +1,1669 @@
+{
+  "versao_modelo": "0.3.0",
+  "nome": "Base de conhecimento da Etapa 2 — Consultor Avançado de Carreiras em TI",
+  "observacao": "Base de conhecimento aprovada em etapas para a atividade 2. Índices de compatibilidade, níveis de referência Júnior e roteiros são orientativos, não probabilidades de êxito ou exigências universais de contratação.",
+  "escalas": {
+    "afinidade": {
+      "minimo": 1,
+      "maximo": 5,
+      "rotulos": {
+        "1": "Nenhum interesse",
+        "2": "Pouco interesse",
+        "3": "Interesse moderado",
+        "4": "Bastante interesse",
+        "5": "Muito interesse"
+      },
+      "resposta_desconhecida": null
+    },
+    "objetivo": {
+      "minimo": 1,
+      "maximo": 5,
+      "resposta_desconhecida": null
+    },
+    "conhecimento": {
+      "minimo": 0,
+      "maximo": 3,
+      "rotulos": {
+        "0": "Nenhum conhecimento",
+        "1": "Básico",
+        "2": "Intermediário",
+        "3": "Prático"
+      }
+    },
+    "pesos": {
+      "minimo": 0,
+      "maximo": 5
+    }
+  },
+  "parametros_calculo": {
+    "participacao_afinidades": 0.8,
+    "participacao_objetivos": 0.2,
+    "normalizacao_por_dimensao": "(resposta - 1) / 4",
+    "media_ponderada": "soma(peso * nota_normalizada) / soma(pesos_respondidos)",
+    "compatibilidade_base": "100 * (0.80 * media_afinidades + 0.20 * media_objetivos)",
+    "compatibilidade_final": "limitar(compatibilidade_base - soma_penalidades_limitada, 0, 100)",
+    "penalidade_atividade_principal_pontos_percentuais": 8,
+    "penalidade_atividade_complementar_pontos_percentuais": 4,
+    "limite_penalidades_pontos_percentuais": 16,
+    "cobertura_minima_afinidades": 0.7,
+    "cobertura_minima_objetivos": 0.7,
+    "formula_cobertura_ponderada": "soma(pesos_de_itens_respondidos) / soma(pesos_totais_da_carreira)",
+    "tratamento_respostas_desconhecidas": "O valor null significa que a pessoa não consegue avaliar a dimensão/objetivo e não é equivalente à menor nota. Seu peso fica fora da média ponderada, mas permanece no denominador da cobertura. A nota mínima 1 é uma resposta válida e conta para a cobertura.",
+    "tratamento_cobertura_insuficiente": "Se a cobertura de afinidades ou objetivos de uma carreira for inferior a 70%, essa carreira não recebe percentual definitivo e fica sinalizada como dados insuficientes.",
+    "criterio_top_3": "Calcular e ordenar por compatibilidade final somente as carreiras com cobertura de afinidades e objetivos >= 70%. Se menos de três carreiras forem elegíveis, solicitar respostas adicionais antes de apresentar o Top 3 completo.",
+    "tratamento_penalidades": "Somar apenas penalidades correspondentes às restrições explicitamente selecionadas; aplicar o limite acumulado de 16 pontos percentuais por carreira. Afinidade baixa e conhecimento técnico baixo não geram penalidade extra. Mostrar motivos e valores das penalidades aplicadas. Nenhuma carreira é eliminada automaticamente por restrições.",
+    "tratamento_contradicoes": "Quando uma restrição selecionada corresponder a uma afinidade avaliada com nota >= 4, exibir aviso e permitir revisar ou confirmar. Se confirmada, manter respostas e penalidade. Uma contradição aparente não é automaticamente um erro."
+  },
+  "dimensoes_afinidade": {
+    "D01": {
+      "nome": "Lógica e programação",
+      "descricao": "Interesse em algoritmos, código e resolução de problemas."
+    },
+    "D02": {
+      "nome": "Desenvolvimento Back-end",
+      "descricao": "Interesse em APIs, servidores e lógica interna de sistemas."
+    },
+    "D03": {
+      "nome": "Interfaces e UI/UX",
+      "descricao": "Interesse em design, interfaces e experiência do usuário."
+    },
+    "D04": {
+      "nome": "Matemática e estatística",
+      "descricao": "Interesse em cálculos, estatística e raciocínio matemático."
+    },
+    "D05": {
+      "nome": "Ciência de Dados e IA",
+      "descricao": "Interesse em análise de dados, previsões e Machine Learning."
+    },
+    "D06": {
+      "nome": "Engenharia de Dados",
+      "descricao": "Interesse em SQL, bancos de dados e pipelines de processamento."
+    },
+    "D07": {
+      "nome": "Cibersegurança",
+      "descricao": "Interesse em investigar vulnerabilidades e proteger sistemas."
+    },
+    "D08": {
+      "nome": "Infraestrutura e redes",
+      "descricao": "Interesse em servidores, sistemas operacionais e conectividade."
+    },
+    "D09": {
+      "nome": "Automação e DevOps",
+      "descricao": "Interesse em automatizar processos, implantações e integrações."
+    },
+    "D10": {
+      "nome": "Computação em nuvem",
+      "descricao": "Interesse em serviços cloud, escalabilidade e arquiteturas."
+    },
+    "D11": {
+      "nome": "Desenvolvimento Mobile",
+      "descricao": "Interesse em desenvolver aplicativos para celulares e tablets."
+    },
+    "D12": {
+      "nome": "Qualidade e testes (QA)",
+      "descricao": "Interesse em testar software, investigar defeitos e prevenir falhas."
+    },
+    "D13": {
+      "nome": "Gestão de produtos",
+      "descricao": "Interesse em planejamento, prioridades, comunicação e decisões de produto."
+    }
+  },
+  "objetivos_profissionais": {
+    "O01": {
+      "descricao": "Desenvolver sistemas e soluções de software"
+    },
+    "O02": {
+      "descricao": "Criar experiências digitais intuitivas e acessíveis"
+    },
+    "O03": {
+      "descricao": "Transformar dados em informações e decisões"
+    },
+    "O04": {
+      "descricao": "Manter infraestruturas e serviços tecnológicos eficientes e escaláveis"
+    },
+    "O05": {
+      "descricao": "Proteger sistemas, dados e informações"
+    },
+    "O06": {
+      "descricao": "Garantir a qualidade e a confiabilidade de aplicações"
+    },
+    "O07": {
+      "descricao": "Planejar produtos e contribuir para decisões estratégicas"
+    },
+    "O08": {
+      "descricao": "Desenvolver soluções para dispositivos móveis"
+    }
+  },
+  "restricoes_atividades": {
+    "RSTR01": {
+      "descricao": "Prefiro evitar programação frequente."
+    },
+    "RSTR02": {
+      "descricao": "Prefiro evitar cálculos e análises estatísticas."
+    },
+    "RSTR03": {
+      "descricao": "Prefiro evitar criar interfaces e elementos visuais."
+    },
+    "RSTR04": {
+      "descricao": "Prefiro evitar administrar servidores e redes."
+    },
+    "RSTR05": {
+      "descricao": "Prefiro evitar investigar vulnerabilidades de segurança."
+    },
+    "RSTR06": {
+      "descricao": "Prefiro evitar realizar testes de software."
+    },
+    "RSTR07": {
+      "descricao": "Prefiro evitar automatizar implantações e processos de infraestrutura."
+    },
+    "RSTR08": {
+      "descricao": "Prefiro evitar planejar prioridades e requisitos de produtos."
+    }
+  },
+  "carreiras": {
+    "backend": {
+      "nome": "Desenvolvimento Back-end",
+      "pesos_afinidade": {
+        "D01": 5,
+        "D02": 5,
+        "D06": 3,
+        "D12": 2,
+        "D09": 2
+      },
+      "pesos_objetivos": {
+        "O01": 5,
+        "O04": 2
+      },
+      "competencias": [
+        {
+          "codigo": "BACKEND_01",
+          "nome": "Lógica e programação",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Variáveis, estruturas condicionais, repetição e funções",
+            "Estruturas de dados e decomposição de problemas"
+          ],
+          "praticas": [
+            "Resolver problemas com funções e testes simples"
+          ],
+          "tecnologias_sugeridas": [
+            "Python ou Java"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "BACKEND_02",
+          "nome": "APIs REST",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Métodos HTTP, rotas e códigos de resposta",
+            "JSON, validação de dados e princípios REST"
+          ],
+          "praticas": [
+            "Criar endpoints CRUD para uma coleção de recursos"
+          ],
+          "tecnologias_sugeridas": [
+            "FastAPI ou Spring Boot",
+            "HTTP",
+            "JSON"
+          ],
+          "pre_requisitos": [
+            "BACKEND_01"
+          ]
+        },
+        {
+          "codigo": "BACKEND_03",
+          "nome": "Bancos de dados SQL",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "SELECT, JOIN, filtros e agregações",
+            "Chaves, relacionamentos e operações CRUD"
+          ],
+          "praticas": [
+            "Modelar tabelas e integrar consultas à API"
+          ],
+          "tecnologias_sugeridas": [
+            "PostgreSQL ou SQLite",
+            "SQL"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "BACKEND_04",
+          "nome": "Orientação a objetos",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Classes, objetos, encapsulamento e composição",
+            "Separação de responsabilidades e organização do código"
+          ],
+          "praticas": [
+            "Refatorar parte da API utilizando objetos e serviços"
+          ],
+          "tecnologias_sugeridas": [
+            "Python ou Java"
+          ],
+          "pre_requisitos": [
+            "BACKEND_01"
+          ]
+        },
+        {
+          "codigo": "BACKEND_05",
+          "nome": "Testes de software",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Casos de teste, asserções e cenários de erro",
+            "Testes unitários e de integração básicos"
+          ],
+          "praticas": [
+            "Automatizar testes de endpoints e funções"
+          ],
+          "tecnologias_sugeridas": [
+            "pytest ou JUnit"
+          ],
+          "pre_requisitos": [
+            "BACKEND_01",
+            "BACKEND_02"
+          ]
+        }
+      ],
+      "projeto_portfolio": {
+        "titulo": "API REST de gerenciamento de tarefas",
+        "descricao": "API com operações CRUD, persistência, validações e testes básicos.",
+        "entregaveis": [
+          "Código-fonte da API e esquema de banco de dados",
+          "Testes automatizados e exemplos de requisições",
+          "README com instalação, execução e endpoints"
+        ],
+        "competencias_relacionadas": [
+          "BACKEND_01",
+          "BACKEND_02",
+          "BACKEND_03",
+          "BACKEND_04",
+          "BACKEND_05"
+        ],
+        "plataforma_sugerida": "GitHub"
+      },
+      "certificacoes_opcionais": []
+    },
+    "frontend": {
+      "nome": "Desenvolvimento Front-end e UI/UX",
+      "pesos_afinidade": {
+        "D03": 5,
+        "D01": 4,
+        "D12": 2,
+        "D02": 1
+      },
+      "pesos_objetivos": {
+        "O02": 5,
+        "O01": 3
+      },
+      "competencias": [
+        {
+          "codigo": "FRONTEND_01",
+          "nome": "HTML, CSS e JavaScript",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "HTML semântico, CSS e JavaScript",
+            "Manipulação do DOM e eventos"
+          ],
+          "praticas": [
+            "Construir uma página interativa com HTML, CSS e JavaScript"
+          ],
+          "tecnologias_sugeridas": [
+            "HTML",
+            "CSS",
+            "JavaScript"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "FRONTEND_02",
+          "nome": "Interfaces responsivas",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Layouts flexíveis e responsivos",
+            "Media queries e organização de componentes visuais"
+          ],
+          "praticas": [
+            "Adaptar uma interface para celular e desktop"
+          ],
+          "tecnologias_sugeridas": [
+            "CSS Grid",
+            "Flexbox"
+          ],
+          "pre_requisitos": [
+            "FRONTEND_01"
+          ]
+        },
+        {
+          "codigo": "FRONTEND_03",
+          "nome": "Frameworks front-end",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Componentes, propriedades e estado",
+            "Renderização e consumo básico de dados"
+          ],
+          "praticas": [
+            "Montar uma tela por componentes reutilizáveis"
+          ],
+          "tecnologias_sugeridas": [
+            "React ou Vue"
+          ],
+          "pre_requisitos": [
+            "FRONTEND_01"
+          ]
+        },
+        {
+          "codigo": "FRONTEND_04",
+          "nome": "Acessibilidade",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Semântica acessível e navegação por teclado",
+            "Contraste, rótulos e texto alternativo"
+          ],
+          "praticas": [
+            "Revisar o formulário e corrigir problemas básicos de acessibilidade"
+          ],
+          "tecnologias_sugeridas": [
+            "WCAG",
+            "Lighthouse"
+          ],
+          "pre_requisitos": [
+            "FRONTEND_01"
+          ]
+        },
+        {
+          "codigo": "FRONTEND_05",
+          "nome": "Princípios de UI/UX",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Hierarquia visual e consistência",
+            "Fluxos de interação e avaliação de usabilidade"
+          ],
+          "praticas": [
+            "Produzir wireframes e justificar decisões de interface"
+          ],
+          "tecnologias_sugeridas": [
+            "Figma"
+          ],
+          "pre_requisitos": []
+        }
+      ],
+      "projeto_portfolio": {
+        "titulo": "Interface responsiva de consulta a serviços",
+        "descricao": "Protótipo e implementação de interface acessível que consome dados de uma API.",
+        "entregaveis": [
+          "Wireframes e justificativas de UX",
+          "Páginas responsivas com componentes",
+          "README com avaliação básica de acessibilidade"
+        ],
+        "competencias_relacionadas": [
+          "FRONTEND_01",
+          "FRONTEND_02",
+          "FRONTEND_03",
+          "FRONTEND_04",
+          "FRONTEND_05"
+        ],
+        "plataforma_sugerida": "GitHub"
+      },
+      "certificacoes_opcionais": []
+    },
+    "ciencia_dados": {
+      "nome": "Ciência de Dados e Machine Learning",
+      "pesos_afinidade": {
+        "D05": 5,
+        "D04": 5,
+        "D06": 3,
+        "D01": 2
+      },
+      "pesos_objetivos": {
+        "O03": 5
+      },
+      "competencias": [
+        {
+          "codigo": "CIENCIA_DADOS_01",
+          "nome": "Python para dados",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Tipos de dados, funções e manipulação de tabelas",
+            "Limpeza e transformação de dados"
+          ],
+          "praticas": [
+            "Preparar e explorar um conjunto de dados real ou aberto"
+          ],
+          "tecnologias_sugeridas": [
+            "Python",
+            "pandas",
+            "Jupyter Notebook"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "CIENCIA_DADOS_02",
+          "nome": "Matemática e estatística",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Média, mediana, dispersão e probabilidade básica",
+            "Amostragem, correlação e interpretação de resultados"
+          ],
+          "praticas": [
+            "Comparar distribuições e documentar interpretações"
+          ],
+          "tecnologias_sugeridas": [
+            "Python",
+            "NumPy"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "CIENCIA_DADOS_03",
+          "nome": "SQL",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Consultas SELECT, JOIN e agregações",
+            "Extração de dados de tabelas relacionadas"
+          ],
+          "praticas": [
+            "Montar consultas para responder a perguntas de negócio"
+          ],
+          "tecnologias_sugeridas": [
+            "SQL",
+            "SQLite ou PostgreSQL"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "CIENCIA_DADOS_04",
+          "nome": "Análise e visualização de dados",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Análise exploratória de dados e indicadores",
+            "Escolha apropriada de gráficos e comunicação de resultados"
+          ],
+          "praticas": [
+            "Produzir gráficos e conclusões sobre os dados analisados"
+          ],
+          "tecnologias_sugeridas": [
+            "pandas",
+            "Matplotlib"
+          ],
+          "pre_requisitos": [
+            "CIENCIA_DADOS_01",
+            "CIENCIA_DADOS_02"
+          ]
+        },
+        {
+          "codigo": "CIENCIA_DADOS_05",
+          "nome": "Fundamentos de Machine Learning",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Aprendizado supervisionado, treino e teste",
+            "Métricas básicas e risco de sobreajuste"
+          ],
+          "praticas": [
+            "Treinar um modelo simples e relatar suas limitações"
+          ],
+          "tecnologias_sugeridas": [
+            "scikit-learn"
+          ],
+          "pre_requisitos": [
+            "CIENCIA_DADOS_01",
+            "CIENCIA_DADOS_02"
+          ]
+        }
+      ],
+      "projeto_portfolio": {
+        "titulo": "Análise exploratória com previsão simples",
+        "descricao": "Explorar conjunto de dados público e avaliar modelo básico com limites explicitados.",
+        "entregaveis": [
+          "Notebook com limpeza e gráficos",
+          "Modelo simples e métricas explicadas",
+          "README com origem dos dados e limitações"
+        ],
+        "competencias_relacionadas": [
+          "CIENCIA_DADOS_01",
+          "CIENCIA_DADOS_02",
+          "CIENCIA_DADOS_03",
+          "CIENCIA_DADOS_04",
+          "CIENCIA_DADOS_05"
+        ],
+        "plataforma_sugerida": "GitHub"
+      },
+      "certificacoes_opcionais": [
+        {
+          "nome": "Microsoft Certified: Azure Data Fundamentals (DP-900)",
+          "url_oficial": "https://learn.microsoft.com/en-us/credentials/certifications/azure-data-fundamentals/",
+          "observacao": "Opcional para fundamentos de dados; certificação de plataforma, não exigência de Ciência de Dados."
+        }
+      ]
+    },
+    "engenharia_dados": {
+      "nome": "Engenharia de Dados",
+      "pesos_afinidade": {
+        "D06": 5,
+        "D01": 4,
+        "D09": 3,
+        "D04": 2,
+        "D05": 2
+      },
+      "pesos_objetivos": {
+        "O03": 4,
+        "O04": 3
+      },
+      "competencias": [
+        {
+          "codigo": "ENGENHARIA_DADOS_01",
+          "nome": "SQL avançado",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "JOIN, CTE, agregações e funções de janela",
+            "Boas práticas e desempenho inicial de consultas"
+          ],
+          "praticas": [
+            "Produzir consultas para consolidar dados de múltiplas tabelas"
+          ],
+          "tecnologias_sugeridas": [
+            "PostgreSQL",
+            "SQL"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "ENGENHARIA_DADOS_02",
+          "nome": "Modelagem de dados",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Entidades, relacionamentos e normalização",
+            "Modelagem lógica e esquemas analíticos básicos"
+          ],
+          "praticas": [
+            "Desenhar e implementar esquema de banco de dados"
+          ],
+          "tecnologias_sugeridas": [
+            "SQL",
+            "diagrama ER"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "ENGENHARIA_DADOS_03",
+          "nome": "Python",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Manipulação de arquivos e funções",
+            "Validação de dados e tratamento de erros"
+          ],
+          "praticas": [
+            "Escrever um script que lê, limpa e salva registros"
+          ],
+          "tecnologias_sugeridas": [
+            "Python",
+            "pandas"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "ENGENHARIA_DADOS_04",
+          "nome": "Pipelines ETL/ELT",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Extração, transformação e carregamento",
+            "Execução sequencial e tratamento de falhas"
+          ],
+          "praticas": [
+            "Construir pipeline de CSV/API para banco de dados"
+          ],
+          "tecnologias_sugeridas": [
+            "Python",
+            "SQL"
+          ],
+          "pre_requisitos": [
+            "ENGENHARIA_DADOS_01",
+            "ENGENHARIA_DADOS_03"
+          ]
+        },
+        {
+          "codigo": "ENGENHARIA_DADOS_05",
+          "nome": "Processamento e integração de dados",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Formatos CSV e JSON, consistência de dados",
+            "Integração entre fontes e tratamento de duplicatas"
+          ],
+          "praticas": [
+            "Integrar duas fontes de dados e registrar validações"
+          ],
+          "tecnologias_sugeridas": [
+            "Python",
+            "SQL",
+            "JSON"
+          ],
+          "pre_requisitos": [
+            "ENGENHARIA_DADOS_03",
+            "ENGENHARIA_DADOS_04"
+          ]
+        }
+      ],
+      "projeto_portfolio": {
+        "titulo": "Pipeline ETL de dados abertos",
+        "descricao": "Extrair dados de arquivos ou API, tratar e carregar em banco relacional.",
+        "entregaveis": [
+          "Scripts de ingestão e transformação",
+          "Banco e esquema de dados",
+          "README com fluxo, execução e validações"
+        ],
+        "competencias_relacionadas": [
+          "ENGENHARIA_DADOS_01",
+          "ENGENHARIA_DADOS_02",
+          "ENGENHARIA_DADOS_03",
+          "ENGENHARIA_DADOS_04",
+          "ENGENHARIA_DADOS_05"
+        ],
+        "plataforma_sugerida": "GitHub"
+      },
+      "certificacoes_opcionais": [
+        {
+          "nome": "Microsoft Certified: Azure Data Fundamentals (DP-900)",
+          "url_oficial": "https://learn.microsoft.com/en-us/credentials/certifications/azure-data-fundamentals/",
+          "observacao": "Opcional para fundamentos de dados em nuvem."
+        }
+      ]
+    },
+    "ciberseguranca": {
+      "nome": "Cibersegurança",
+      "pesos_afinidade": {
+        "D07": 5,
+        "D08": 4,
+        "D01": 2,
+        "D12": 2
+      },
+      "pesos_objetivos": {
+        "O05": 5,
+        "O04": 2
+      },
+      "competencias": [
+        {
+          "codigo": "CIBERSEGURANCA_01",
+          "nome": "Redes de computadores",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "TCP/IP, DNS, HTTP e portas",
+            "Conceitos de rede local e segmentação"
+          ],
+          "praticas": [
+            "Documentar uma rede de laboratório e seus serviços"
+          ],
+          "tecnologias_sugeridas": [
+            "Wireshark",
+            "laboratório local"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "CIBERSEGURANCA_02",
+          "nome": "Sistemas Linux",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Terminal, permissões e processos",
+            "Contas, atualização de pacotes e registros do sistema"
+          ],
+          "praticas": [
+            "Configurar usuários e permissões em máquina virtual"
+          ],
+          "tecnologias_sugeridas": [
+            "Linux",
+            "VirtualBox"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "CIBERSEGURANCA_03",
+          "nome": "Fundamentos de segurança",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Autenticação, autorização e princípio do menor privilégio",
+            "Confidencialidade, integridade, disponibilidade e gestão de riscos"
+          ],
+          "praticas": [
+            "Elaborar uma checklist de configuração segura para ambiente de laboratório"
+          ],
+          "tecnologias_sugeridas": [
+            "Documentação de segurança",
+            "Linux"
+          ],
+          "pre_requisitos": [
+            "CIBERSEGURANCA_01"
+          ]
+        },
+        {
+          "codigo": "CIBERSEGURANCA_04",
+          "nome": "Análise de vulnerabilidades",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Conceito de vulnerabilidade, risco e correção",
+            "Escopo autorizado e divulgação responsável"
+          ],
+          "praticas": [
+            "Realizar análise defensiva de configuração em ambiente próprio e elaborar recomendações"
+          ],
+          "tecnologias_sugeridas": [
+            "Laboratório isolado",
+            "checklists de configuração"
+          ],
+          "pre_requisitos": [
+            "CIBERSEGURANCA_02",
+            "CIBERSEGURANCA_03"
+          ]
+        },
+        {
+          "codigo": "CIBERSEGURANCA_05",
+          "nome": "Monitoramento e resposta a incidentes",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Logs, alertas e triagem inicial",
+            "Fluxo de registro, classificação e resposta a incidentes"
+          ],
+          "praticas": [
+            "Analisar logs simulados e produzir relatório de triagem"
+          ],
+          "tecnologias_sugeridas": [
+            "Logs de sistema",
+            "planilha de incidentes"
+          ],
+          "pre_requisitos": [
+            "CIBERSEGURANCA_01",
+            "CIBERSEGURANCA_03"
+          ]
+        }
+      ],
+      "projeto_portfolio": {
+        "titulo": "Laboratório defensivo de segurança",
+        "descricao": "Analisar configurações e logs de um laboratório próprio ou expressamente autorizado.",
+        "entregaveis": [
+          "Diagrama do laboratório e seu escopo",
+          "Checklist de configurações e análise de logs",
+          "Relatório defensivo de achados e mitigação"
+        ],
+        "competencias_relacionadas": [
+          "CIBERSEGURANCA_01",
+          "CIBERSEGURANCA_02",
+          "CIBERSEGURANCA_03",
+          "CIBERSEGURANCA_04",
+          "CIBERSEGURANCA_05"
+        ],
+        "plataforma_sugerida": "GitHub"
+      },
+      "certificacoes_opcionais": [
+        {
+          "nome": "ISC2 Certified in Cybersecurity (CC)",
+          "url_oficial": "https://www.isc2.org/certifications/cc",
+          "observacao": "Credencial introdutória de segurança; verificar elegibilidade e custos vigentes."
+        },
+        {
+          "nome": "Microsoft Certified: Security, Compliance, and Identity Fundamentals (SC-900)",
+          "url_oficial": "https://learn.microsoft.com/en-us/credentials/certifications/security-compliance-and-identity-fundamentals/",
+          "observacao": "Opcional, especialmente para quem deseja seguir tecnologias Microsoft."
+        }
+      ]
+    },
+    "devops": {
+      "nome": "DevOps e SRE",
+      "pesos_afinidade": {
+        "D09": 5,
+        "D08": 5,
+        "D10": 3,
+        "D01": 2,
+        "D12": 2
+      },
+      "pesos_objetivos": {
+        "O04": 5,
+        "O06": 3
+      },
+      "competencias": [
+        {
+          "codigo": "DEVOPS_01",
+          "nome": "Linux e administração de sistemas",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Linux, usuários, permissões e serviços",
+            "Processos, logs e comandos básicos de rede"
+          ],
+          "praticas": [
+            "Preparar ambiente Linux e documentar sua configuração"
+          ],
+          "tecnologias_sugeridas": [
+            "Linux",
+            "Shell"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "DEVOPS_02",
+          "nome": "Git e CI/CD",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Commits, branches e integração contínua",
+            "Build, teste automatizado e entrega contínua"
+          ],
+          "praticas": [
+            "Criar workflow que execute testes em cada atualização do projeto"
+          ],
+          "tecnologias_sugeridas": [
+            "Git",
+            "GitHub Actions"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "DEVOPS_03",
+          "nome": "Contêineres",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Imagens, contêineres e volumes",
+            "Isolamento e empacotamento de aplicação"
+          ],
+          "praticas": [
+            "Criar Dockerfile e executar aplicação em contêiner local"
+          ],
+          "tecnologias_sugeridas": [
+            "Docker"
+          ],
+          "pre_requisitos": [
+            "DEVOPS_01"
+          ]
+        },
+        {
+          "codigo": "DEVOPS_04",
+          "nome": "Automação de infraestrutura",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Scripts idempotentes e configuração de ambiente",
+            "Princípios de infraestrutura como código"
+          ],
+          "praticas": [
+            "Automatizar preparação de ambiente de desenvolvimento"
+          ],
+          "tecnologias_sugeridas": [
+            "Shell",
+            "Ansible (opcional)"
+          ],
+          "pre_requisitos": [
+            "DEVOPS_01"
+          ]
+        },
+        {
+          "codigo": "DEVOPS_05",
+          "nome": "Monitoramento e observabilidade",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Métricas, logs e disponibilidade",
+            "Alertas e princípios de observabilidade"
+          ],
+          "praticas": [
+            "Registrar métricas e analisar falha controlada em ambiente local"
+          ],
+          "tecnologias_sugeridas": [
+            "Logs",
+            "Prometheus ou alternativa simples"
+          ],
+          "pre_requisitos": [
+            "DEVOPS_01",
+            "DEVOPS_03"
+          ]
+        }
+      ],
+      "projeto_portfolio": {
+        "titulo": "Aplicação conteinerizada com CI/CD e logs",
+        "descricao": "Empacotar aplicação simples, automatizar testes e registrar observabilidade inicial.",
+        "entregaveis": [
+          "Dockerfile e instruções locais",
+          "Pipeline de CI com validações",
+          "README com monitoramento, logs e decisões técnicas"
+        ],
+        "competencias_relacionadas": [
+          "DEVOPS_01",
+          "DEVOPS_02",
+          "DEVOPS_03",
+          "DEVOPS_04",
+          "DEVOPS_05"
+        ],
+        "plataforma_sugerida": "GitHub"
+      },
+      "certificacoes_opcionais": [
+        {
+          "nome": "Linux Foundation Certified System Administrator (LFCS)",
+          "url_oficial": "https://training.linuxfoundation.org/certification/linux-foundation-certified-sysadmin-lfcs/",
+          "observacao": "Opcional após consolidar administração Linux; não é etapa necessária para começar."
+        }
+      ]
+    },
+    "nuvem": {
+      "nome": "Computação em Nuvem",
+      "pesos_afinidade": {
+        "D10": 5,
+        "D08": 4,
+        "D09": 4,
+        "D07": 2
+      },
+      "pesos_objetivos": {
+        "O04": 5,
+        "O05": 2
+      },
+      "competencias": [
+        {
+          "codigo": "NUVEM_01",
+          "nome": "Fundamentos de cloud",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "IaaS, PaaS, SaaS e modelos de implantação",
+            "Responsabilidade compartilhada e custos básicos"
+          ],
+          "praticas": [
+            "Comparar serviços em cenários simples de hospedagem"
+          ],
+          "tecnologias_sugeridas": [
+            "AWS ou Azure (camada gratuita quando aplicável)"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "NUVEM_02",
+          "nome": "Redes e infraestrutura",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "IP, DNS, firewall e segmentação",
+            "Servidores, armazenamento e conectividade"
+          ],
+          "praticas": [
+            "Desenhar arquitetura de rede para aplicativo web"
+          ],
+          "tecnologias_sugeridas": [
+            "Diagramas de arquitetura",
+            "Linux"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "NUVEM_03",
+          "nome": "Serviços de nuvem",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Computação, armazenamento e banco gerenciado",
+            "Escalabilidade e disponibilidade em nível introdutório"
+          ],
+          "praticas": [
+            "Selecionar serviços de nuvem para uma aplicação pequena"
+          ],
+          "tecnologias_sugeridas": [
+            "AWS ou Azure"
+          ],
+          "pre_requisitos": [
+            "NUVEM_01",
+            "NUVEM_02"
+          ]
+        },
+        {
+          "codigo": "NUVEM_04",
+          "nome": "Gerenciamento de identidades e acessos",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Identidade, papéis e políticas de acesso",
+            "Princípio do menor privilégio e autenticação multifator"
+          ],
+          "praticas": [
+            "Projetar papéis de acesso mínimos para laboratório"
+          ],
+          "tecnologias_sugeridas": [
+            "IAM (AWS) ou Entra ID/RBAC (Azure)"
+          ],
+          "pre_requisitos": [
+            "NUVEM_01"
+          ]
+        },
+        {
+          "codigo": "NUVEM_05",
+          "nome": "Implantação e automação",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Etapas de implantação e configuração segura",
+            "Automação básica e monitoramento de custos"
+          ],
+          "praticas": [
+            "Publicar aplicação simples e documentar implantação e remoção de recursos"
+          ],
+          "tecnologias_sugeridas": [
+            "Git",
+            "CLI de nuvem"
+          ],
+          "pre_requisitos": [
+            "NUVEM_01",
+            "NUVEM_03",
+            "NUVEM_04"
+          ]
+        }
+      ],
+      "projeto_portfolio": {
+        "titulo": "Implantação controlada de aplicação em nuvem",
+        "descricao": "Projetar implantação simples com controles mínimos de acesso e atenção aos custos.",
+        "entregaveis": [
+          "Diagrama da arquitetura e configurações relevantes sem segredos",
+          "Registro de implantação e verificação de acesso",
+          "README com passos de remoção dos recursos e cuidados de custo"
+        ],
+        "competencias_relacionadas": [
+          "NUVEM_01",
+          "NUVEM_02",
+          "NUVEM_03",
+          "NUVEM_04",
+          "NUVEM_05"
+        ],
+        "plataforma_sugerida": "GitHub"
+      },
+      "certificacoes_opcionais": [
+        {
+          "nome": "AWS Certified Cloud Practitioner",
+          "url_oficial": "https://aws.amazon.com/certification/certified-cloud-practitioner/",
+          "observacao": "Opcional para fundamentos da AWS."
+        },
+        {
+          "nome": "Microsoft Certified: Azure Fundamentals (AZ-900)",
+          "url_oficial": "https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/",
+          "observacao": "Opcional para fundamentos do Azure; não é necessário realizar ambas."
+        }
+      ]
+    },
+    "mobile": {
+      "nome": "Desenvolvimento Mobile",
+      "pesos_afinidade": {
+        "D11": 5,
+        "D01": 4,
+        "D03": 3,
+        "D02": 2,
+        "D12": 2
+      },
+      "pesos_objetivos": {
+        "O08": 5,
+        "O01": 3,
+        "O02": 2
+      },
+      "competencias": [
+        {
+          "codigo": "MOBILE_01",
+          "nome": "Programação mobile",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Componentes, estado e navegação",
+            "Ciclo de vida básico e estrutura de aplicativo"
+          ],
+          "praticas": [
+            "Criar app com duas telas e navegação"
+          ],
+          "tecnologias_sugeridas": [
+            "React Native ou Flutter"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "MOBILE_02",
+          "nome": "Interfaces para dispositivos móveis",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Layout para telas pequenas e adaptação visual",
+            "Acessibilidade e interações por toque"
+          ],
+          "praticas": [
+            "Construir formulários e listas responsivas no aplicativo"
+          ],
+          "tecnologias_sugeridas": [
+            "React Native ou Flutter",
+            "Figma (opcional)"
+          ],
+          "pre_requisitos": [
+            "MOBILE_01"
+          ]
+        },
+        {
+          "codigo": "MOBILE_03",
+          "nome": "Consumo de APIs",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "HTTP, JSON e operações assíncronas",
+            "Tratamento de loading, erro e ausência de rede"
+          ],
+          "praticas": [
+            "Consultar API pública e exibir lista com tratamento de erro"
+          ],
+          "tecnologias_sugeridas": [
+            "HTTP",
+            "Axios ou biblioteca HTTP equivalente"
+          ],
+          "pre_requisitos": [
+            "MOBILE_01"
+          ]
+        },
+        {
+          "codigo": "MOBILE_04",
+          "nome": "Persistência de dados",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Armazenamento local e serialização",
+            "Persistência de preferências e dados não sensíveis"
+          ],
+          "praticas": [
+            "Salvar e recuperar itens locais no aplicativo"
+          ],
+          "tecnologias_sugeridas": [
+            "AsyncStorage ou SQLite"
+          ],
+          "pre_requisitos": [
+            "MOBILE_01"
+          ]
+        },
+        {
+          "codigo": "MOBILE_05",
+          "nome": "Testes de aplicativos",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Cenários de navegação e validação",
+            "Teste de comportamento em diferentes tamanhos de tela"
+          ],
+          "praticas": [
+            "Registrar casos de teste e corrigir dois defeitos do app"
+          ],
+          "tecnologias_sugeridas": [
+            "Emulador",
+            "ferramentas de teste mobile"
+          ],
+          "pre_requisitos": [
+            "MOBILE_01",
+            "MOBILE_02"
+          ]
+        }
+      ],
+      "projeto_portfolio": {
+        "titulo": "Aplicativo de gerenciamento de tarefas",
+        "descricao": "App com navegação, consumo de API, persistência simples e testes.",
+        "entregaveis": [
+          "Código do aplicativo e capturas das telas",
+          "Integração com API e dados locais",
+          "README com instalação, fluxo e cenários de teste"
+        ],
+        "competencias_relacionadas": [
+          "MOBILE_01",
+          "MOBILE_02",
+          "MOBILE_03",
+          "MOBILE_04",
+          "MOBILE_05"
+        ],
+        "plataforma_sugerida": "GitHub"
+      },
+      "certificacoes_opcionais": []
+    },
+    "qa": {
+      "nome": "Engenharia de Qualidade e Testes (QA)",
+      "pesos_afinidade": {
+        "D12": 5,
+        "D01": 3,
+        "D07": 2,
+        "D09": 2,
+        "D03": 1
+      },
+      "pesos_objetivos": {
+        "O06": 5,
+        "O05": 2
+      },
+      "competencias": [
+        {
+          "codigo": "QA_01",
+          "nome": "Fundamentos de testes",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Objetivos de teste e níveis de teste",
+            "Técnicas de caixa-preta e critérios de aceite"
+          ],
+          "praticas": [
+            "Definir cenários de teste para funcionalidade simples"
+          ],
+          "tecnologias_sugeridas": [
+            "Planilha de testes ou ferramenta de gestão"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "QA_02",
+          "nome": "Elaboração de casos de teste",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Pré-condições, passos e resultados esperados",
+            "Casos positivos, negativos e de borda"
+          ],
+          "praticas": [
+            "Escrever e executar casos de teste reproduzíveis"
+          ],
+          "tecnologias_sugeridas": [
+            "Planilha",
+            "Markdown"
+          ],
+          "pre_requisitos": [
+            "QA_01"
+          ]
+        },
+        {
+          "codigo": "QA_03",
+          "nome": "Identificação e registro de bugs",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Reprodução de defeitos, severidade e prioridade",
+            "Evidências, ambiente e passos para reproduzir"
+          ],
+          "praticas": [
+            "Registrar bugs com evidências e resultado esperado/obtido"
+          ],
+          "tecnologias_sugeridas": [
+            "GitHub Issues ou ferramenta equivalente"
+          ],
+          "pre_requisitos": [
+            "QA_01"
+          ]
+        },
+        {
+          "codigo": "QA_04",
+          "nome": "Testes de API",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "HTTP, GET, POST, PUT, DELETE e códigos de status",
+            "JSON e validação de contratos e respostas"
+          ],
+          "praticas": [
+            "Testar API pública, documentando requisições e verificações"
+          ],
+          "tecnologias_sugeridas": [
+            "Postman ou Insomnia",
+            "HTTP"
+          ],
+          "pre_requisitos": [
+            "QA_01"
+          ]
+        },
+        {
+          "codigo": "QA_05",
+          "nome": "Automação de testes",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Seletores, asserções e execução automatizada",
+            "Organização de cenários e interpretação de falhas"
+          ],
+          "praticas": [
+            "Automatizar fluxo simples de interface ou API"
+          ],
+          "tecnologias_sugeridas": [
+            "Playwright ou pytest"
+          ],
+          "pre_requisitos": [
+            "QA_01",
+            "QA_02"
+          ]
+        }
+      ],
+      "projeto_portfolio": {
+        "titulo": "Portfólio de testes manuais, API e automação",
+        "descricao": "Plano de testes para aplicação de demonstração, incluindo cenários automatizados.",
+        "entregaveis": [
+          "Casos de teste e evidências de execução",
+          "Coleção de testes de API e scripts automatizados",
+          "Relatórios de defeitos e README com instruções"
+        ],
+        "competencias_relacionadas": [
+          "QA_01",
+          "QA_02",
+          "QA_03",
+          "QA_04",
+          "QA_05"
+        ],
+        "plataforma_sugerida": "GitHub"
+      },
+      "certificacoes_opcionais": [
+        {
+          "nome": "ISTQB Certified Tester Foundation Level (CTFL v4.0)",
+          "url_oficial": "https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/",
+          "observacao": "Opcional para fundamentos de teste; portfólio prático continua importante."
+        }
+      ]
+    },
+    "gestao_produtos": {
+      "nome": "Gestão de Produtos Digitais",
+      "pesos_afinidade": {
+        "D13": 5,
+        "D03": 3,
+        "D12": 2,
+        "D05": 2
+      },
+      "pesos_objetivos": {
+        "O07": 5,
+        "O02": 2,
+        "O03": 2
+      },
+      "competencias": [
+        {
+          "codigo": "GESTAO_PRODUTOS_01",
+          "nome": "Levantamento de necessidades",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Entrevistas, dores e necessidades do usuário",
+            "Hipóteses e definição de problema"
+          ],
+          "praticas": [
+            "Sintetizar necessidades de usuários em um problema de produto"
+          ],
+          "tecnologias_sugeridas": [
+            "Documento de descoberta",
+            "formulário de entrevista"
+          ],
+          "pre_requisitos": []
+        },
+        {
+          "codigo": "GESTAO_PRODUTOS_02",
+          "nome": "Definição e priorização de requisitos",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Histórias de usuário e critérios de aceite",
+            "Priorização por valor, esforço e impacto"
+          ],
+          "praticas": [
+            "Montar backlog priorizado com justificativas"
+          ],
+          "tecnologias_sugeridas": [
+            "Trello ou GitHub Projects"
+          ],
+          "pre_requisitos": [
+            "GESTAO_PRODUTOS_01"
+          ]
+        },
+        {
+          "codigo": "GESTAO_PRODUTOS_03",
+          "nome": "Metodologias ágeis",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Scrum, Kanban e ciclos de entrega",
+            "Papéis, cerimônias e gestão visual do fluxo"
+          ],
+          "praticas": [
+            "Simular planejamento e acompanhamento de uma sprint"
+          ],
+          "tecnologias_sugeridas": [
+            "Quadro Kanban"
+          ],
+          "pre_requisitos": [
+            "GESTAO_PRODUTOS_02"
+          ]
+        },
+        {
+          "codigo": "GESTAO_PRODUTOS_04",
+          "nome": "Métricas de produto",
+          "nivel_junior": 1,
+          "fundamentos": [
+            "Indicadores de produto e definição de sucesso",
+            "Funil, retenção e interpretação de métricas simples"
+          ],
+          "praticas": [
+            "Definir indicadores e construir painel conceitual"
+          ],
+          "tecnologias_sugeridas": [
+            "Planilha",
+            "gráficos simples"
+          ],
+          "pre_requisitos": [
+            "GESTAO_PRODUTOS_01"
+          ]
+        },
+        {
+          "codigo": "GESTAO_PRODUTOS_05",
+          "nome": "Comunicação com equipes",
+          "nivel_junior": 2,
+          "fundamentos": [
+            "Comunicação de requisitos e decisões",
+            "Negociação de escopo e registro de alinhamentos"
+          ],
+          "praticas": [
+            "Preparar apresentação de priorização para equipe fictícia"
+          ],
+          "tecnologias_sugeridas": [
+            "Slides",
+            "documento de decisões"
+          ],
+          "pre_requisitos": [
+            "GESTAO_PRODUTOS_01",
+            "GESTAO_PRODUTOS_02"
+          ]
+        }
+      ],
+      "projeto_portfolio": {
+        "titulo": "Caso de produto digital com backlog e métricas",
+        "descricao": "Simular descoberta e planejamento de evolução de produto com decisões justificadas.",
+        "entregaveis": [
+          "Documento de problema, usuários e objetivos",
+          "Backlog priorizado com critérios de aceite",
+          "Plano de métricas e apresentação de decisões"
+        ],
+        "competencias_relacionadas": [
+          "GESTAO_PRODUTOS_01",
+          "GESTAO_PRODUTOS_02",
+          "GESTAO_PRODUTOS_03",
+          "GESTAO_PRODUTOS_04",
+          "GESTAO_PRODUTOS_05"
+        ],
+        "plataforma_sugerida": "GitHub"
+      },
+      "certificacoes_opcionais": [
+        {
+          "nome": "Professional Scrum Product Owner I (PSPO I)",
+          "url_oficial": "https://www.scrum.org/assessments/professional-scrum-product-owner-i-certification",
+          "observacao": "Opcional para aprofundar Product Ownership e Scrum; não substitui experiência prática."
+        }
+      ]
+    }
+  },
+  "modelagem_pendente": [
+    "Implementar e testar o motor ponderado em Python com carregamento dinâmico da base JSON, incluindo Top 3, cobertura, penalidades e avisos de contradições.",
+    "Implementar e testar a avaliação autodeclarada de cinco competências, detecção de lacunas e seleção dinâmica das etapas do roadmap.",
+    "Adaptar a interface Streamlit para wizard e resultados com ranking, gráficos, justificativas e plano de ação.",
+    "Executar casos limite, perfis ambíguos, respostas desconhecidas, empates e ausência de lacunas."
+  ],
+  "penalidades_logicas": [
+    {
+      "restricao": "RSTR01",
+      "carreira": "backend",
+      "tipo": "principal",
+      "pontos_percentuais": 8
+    },
+    {
+      "restricao": "RSTR01",
+      "carreira": "frontend",
+      "tipo": "principal",
+      "pontos_percentuais": 8
+    },
+    {
+      "restricao": "RSTR01",
+      "carreira": "engenharia_dados",
+      "tipo": "principal",
+      "pontos_percentuais": 8
+    },
+    {
+      "restricao": "RSTR01",
+      "carreira": "mobile",
+      "tipo": "principal",
+      "pontos_percentuais": 8
+    },
+    {
+      "restricao": "RSTR01",
+      "carreira": "ciencia_dados",
+      "tipo": "complementar",
+      "pontos_percentuais": 4
+    },
+    {
+      "restricao": "RSTR01",
+      "carreira": "devops",
+      "tipo": "complementar",
+      "pontos_percentuais": 4
+    },
+    {
+      "restricao": "RSTR01",
+      "carreira": "qa",
+      "tipo": "complementar",
+      "pontos_percentuais": 4
+    },
+    {
+      "restricao": "RSTR02",
+      "carreira": "ciencia_dados",
+      "tipo": "principal",
+      "pontos_percentuais": 8
+    },
+    {
+      "restricao": "RSTR02",
+      "carreira": "engenharia_dados",
+      "tipo": "complementar",
+      "pontos_percentuais": 4
+    },
+    {
+      "restricao": "RSTR03",
+      "carreira": "frontend",
+      "tipo": "principal",
+      "pontos_percentuais": 8
+    },
+    {
+      "restricao": "RSTR03",
+      "carreira": "mobile",
+      "tipo": "complementar",
+      "pontos_percentuais": 4
+    },
+    {
+      "restricao": "RSTR04",
+      "carreira": "devops",
+      "tipo": "principal",
+      "pontos_percentuais": 8
+    },
+    {
+      "restricao": "RSTR04",
+      "carreira": "nuvem",
+      "tipo": "principal",
+      "pontos_percentuais": 8
+    },
+    {
+      "restricao": "RSTR04",
+      "carreira": "ciberseguranca",
+      "tipo": "complementar",
+      "pontos_percentuais": 4
+    },
+    {
+      "restricao": "RSTR05",
+      "carreira": "ciberseguranca",
+      "tipo": "principal",
+      "pontos_percentuais": 8
+    },
+    {
+      "restricao": "RSTR06",
+      "carreira": "qa",
+      "tipo": "principal",
+      "pontos_percentuais": 8
+    },
+    {
+      "restricao": "RSTR06",
+      "carreira": "backend",
+      "tipo": "complementar",
+      "pontos_percentuais": 4
+    },
+    {
+      "restricao": "RSTR06",
+      "carreira": "frontend",
+      "tipo": "complementar",
+      "pontos_percentuais": 4
+    },
+    {
+      "restricao": "RSTR06",
+      "carreira": "mobile",
+      "tipo": "complementar",
+      "pontos_percentuais": 4
+    },
+    {
+      "restricao": "RSTR06",
+      "carreira": "devops",
+      "tipo": "complementar",
+      "pontos_percentuais": 4
+    },
+    {
+      "restricao": "RSTR07",
+      "carreira": "devops",
+      "tipo": "principal",
+      "pontos_percentuais": 8
+    },
+    {
+      "restricao": "RSTR07",
+      "carreira": "nuvem",
+      "tipo": "complementar",
+      "pontos_percentuais": 4
+    },
+    {
+      "restricao": "RSTR08",
+      "carreira": "gestao_produtos",
+      "tipo": "principal",
+      "pontos_percentuais": 8
+    }
+  ],
+  "verificacao_contradicoes": {
+    "nota_afinidade_minima_para_alerta": 4,
+    "comparacoes_restricao_afinidade": {
+      "RSTR01": "D01",
+      "RSTR02": "D04",
+      "RSTR03": "D03",
+      "RSTR04": "D08",
+      "RSTR05": "D07",
+      "RSTR06": "D12",
+      "RSTR07": "D09",
+      "RSTR08": "D13"
+    },
+    "acao": "Solicitar revisão ou confirmação do usuário, sem alterar automaticamente qualquer resposta.",
+    "se_confirmada": "Manter a restrição e aplicar normalmente a penalidade cadastrada, se houver.",
+    "se_afinidade_desconhecida": "Não exibir alerta de contradição para a dimensão com resposta null."
+  },
+  "parametros_skill_gaps": {
+    "escala_conhecimento_atual": "Inteiro autodeclarado de 0 a 3; 0 significa nenhum conhecimento, não resposta em branco.",
+    "escala_referencia_junior": "Inteiro de 0 a 3 definido pedagogicamente para cada competência, sujeito a variações do mercado.",
+    "formula_lacuna": "max(0, nivel_junior - nivel_atual)",
+    "tratamento_conhecimento_nao_informado": "Não interpretar como nível 0. Solicitar informação antes de calcular lacuna da competência.",
+    "se_lacuna_zero": "Marcar competência como nível de referência atendido; não recomendar estudo inicial obrigatório.",
+    "se_lacuna_um": "Recomendar aprofundamento e prática direcionada de acordo com a competência.",
+    "se_lacuna_dois_ou_mais": "Começar pelos fundamentos e pré-requisitos, depois prática e consolidação.",
+    "influencia_no_ranking_top3": "Nenhuma. Lacunas não alteram compatibilidade de afinidades, objetivos e restrições.",
+    "carreira_avaliada": "Após apresentar o Top 3, perguntar qual carreira o usuário deseja explorar e avaliar somente suas cinco competências."
+  },
+  "parametros_roadmap": {
+    "etapas": [
+      {
+        "codigo": "fundamentos",
+        "nome": "Fundamentos",
+        "objetivo": "Priorizar fundamentos e pré-requisitos das competências com lacuna."
+      },
+      {
+        "codigo": "desenvolvimento_tecnico",
+        "nome": "Desenvolvimento técnico",
+        "objetivo": "Propor práticas e tecnologias alinhadas às lacunas identificadas."
+      },
+      {
+        "codigo": "projeto_portfolio",
+        "nome": "Projeto para portfólio",
+        "objetivo": "Sugerir projeto integrador da carreira e destacar as competências que o projeto desenvolve."
+      },
+      {
+        "codigo": "consolidacao",
+        "nome": "Consolidação e próximos passos",
+        "objetivo": "Documentar resultados, revisar conhecimentos e considerar certificações opcionais."
+      }
+    ],
+    "ordenacao_recomendacoes": "Respeitar pre_requisitos antes de suas dependentes; depois priorizar maior lacuna, mantendo ordem estável entre empates.",
+    "como_selecionar_estudos": "Gerar estudos somente para competencias com lacuna > 0; usar competencias[].fundamentos e competencias[].praticas conforme lacuna.",
+    "projetos": "Apresentar projeto_portfolio da carreira escolhida, indicando quais competências com lacunas ele ajuda a exercitar; não pressupor que o usuário já domine as demais.",
+    "sem_lacunas": "Sugerir projeto de consolidação e documentação, sem forçar estudos para competências já acima da referência.",
+    "certificacoes": "Opcionais e não exigidas para a carreira. Exibir sugestões com fonte oficial; confirmar validade, idioma, custo e disponibilidade antes de inscrição.",
+    "repositorio_github": "Sugerir README com objetivo, requisitos, execução, resultados e evidências, sem incluir senhas, credenciais ou dados pessoais."
+  }
+}
