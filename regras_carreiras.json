@@ -1,7 +1,7 @@
 {
   "versao_modelo": "0.3.0",
-  "nome": "Base de conhecimento da Etapa 2 — Consultor Avançado de Carreiras em TI",
-  "observacao": "Base de conhecimento aprovada em etapas para a atividade 2. Índices de compatibilidade, níveis de referência Júnior e roteiros são orientativos, não probabilidades de êxito ou exigências universais de contratação.",
+  "nome": "Base de conhecimento — Consultor Avançado de Carreiras em TI",
+  "observacao": "Base de conhecimento do Consultor Avançado de Carreiras em TI. Índices de compatibilidade, níveis de referência Júnior e roteiros são orientativos, não probabilidades de êxito ou exigências universais de contratação.",
   "escalas": {
     "afinidade": {
       "minimo": 1,
