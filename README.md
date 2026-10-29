@@ -1,155 +1,93 @@
+# Consultor Avançado de Carreiras em TI
 
-# Consultor Inteligente de Carreiras em TI
+Sistema de orientação exploratória de carreiras desenvolvido em **Python**, com interface web em **Streamlit** e base de conhecimento externa em **JSON**. A aplicação avalia interesses técnicos, objetivos profissionais e atividades que a pessoa prefere evitar para apresentar um **ranking com as três carreiras de TI mais compatíveis (Top 3)**.
 
-Sistema Especialista baseado em regras, desenvolvido em **Python**, que entrevista o usuário sobre seus interesses, conhecimentos e objetivos profissionais e recomenda **uma entre dez trilhas de carreira em Tecnologia da Informação**.
+Depois de consultar o ranking, o usuário pode escolher uma das carreiras recomendadas, avaliar seu conhecimento técnico atual e receber uma **trilha personalizada de aprendizagem**, construída a partir das competências que ainda precisa desenvolver.
 
-O projeto utiliza **Experta** como motor de inferência e **Streamlit** para oferecer uma interface web interativa. A recomendação é acompanhada de pontuação e das regras que contribuíram para o resultado.
-
-> **Aviso:** o resultado é uma orientação exploratória baseada nas preferências informadas. Não representa um teste psicológico, uma medida científica de aptidão ou uma garantia de sucesso profissional.
+> **Importante:** os percentuais são **índices orientativos de compatibilidade calculados pelo modelo**, não probabilidades de contratação, diagnósticos de aptidão nem garantias de sucesso profissional. Os níveis de referência “Júnior” são parâmetros pedagógicos do protótipo, não requisitos universais do mercado.
 
 ## Funcionalidades
 
-- Questionário interativo com **10 perguntas e 67 alternativas**, apresentado uma pergunta por vez.
-- **25 regras lógicas cruzadas**, utilizando fatos (`Fact`) e regras (`@Rule`) do Experta.
-- Recomendação de uma das **10 carreiras** contempladas.
-- Pontuação por carreira e justificativas associadas às regras ativadas.
-- Resolução de empates pela afinidade com linguagem/ferramenta (Pergunta 3) ou, quando necessário, por uma pergunta adicional sobre a atividade preferida.
-- Possibilidade de consultar as respostas, revisar escolhas e reiniciar a entrevista.
-- Testes automatizados para regras, perfis profissionais e cenários de empate.
+- **13 perguntas de afinidade técnica**, com escala de 1 a 5 e opção para indicar desconhecimento de uma área.
+- **8 perguntas sobre objetivos profissionais**, também em escala de 1 a 5.
+- **8 restrições opcionais**, para declarar atividades que a pessoa prefere evitar; uma restrição não elimina automaticamente uma carreira.
+- **Verificação de possíveis contradições** entre afinidade alta e atividades que a pessoa declarou preferir evitar, com possibilidade de revisão ou confirmação.
+- **Cálculo ponderado das compatibilidades**, com pesos por carreira cadastrados no JSON e descontos proporcionais às restrições.
+- **Top 3 de carreiras**, com percentuais e explicações sobre afinidades, objetivos, cobertura das respostas e penalidades.
+- **Avaliação de cinco competências técnicas** da carreira escolhida, em escala de 0 a 3, comparadas a referências Júnior da base.
+- **Identificação de lacunas de conhecimento (*skill gaps*)** e geração de um roadmap com quatro etapas: fundamentos, desenvolvimento técnico, projeto para portfólio e consolidação.
+- **Sugestões práticas**, pré-requisitos, entregáveis para GitHub e certificações opcionais, conforme o cadastro da carreira.
+- **50 testes automatizados**, executados com `unittest`, para verificar o motor e a consistência da base.
 
-## Demonstração do sistema
+## Demonstração da aplicação
 
-As imagens a seguir são **capturas reais da aplicação em execução**. Elas ilustram as etapas do questionário, a apresentação dos resultados e os mecanismos de desempate.
+As imagens a seguir são **capturas reais da versão atual da aplicação** em execução local. São cenários ilustrativos; as recomendações variam conforme as respostas. As barras do navegador foram retiradas para destacar a interface do sistema.
 
-As abas e a barra de endereços do navegador foram retiradas das imagens para destacar apenas a interface do sistema.
+### 1. Tela inicial
 
-### Tela inicial
+Apresenta a finalidade da ferramenta e inicia o questionário.
 
-A página apresenta o objetivo do consultor, informa que a avaliação contém dez perguntas e oferece o botão para começar.
+![Tela inicial do Consultor Avançado de Carreiras em TI](imagens/tela_inicial.png)
 
-![Tela inicial do Consultor Inteligente de Carreiras em TI](pacote_readme_imagens/imagens/tela_inicial.png)
+### 2. Perfil profissional
 
-### Questionário interativo
+A coleta de informações é dividida em três etapas. As afinidades e os objetivos são avaliados individualmente, enquanto as restrições permitem seleção múltipla.
 
-O usuário responde uma pergunta de cada vez, escolhendo uma alternativa. A barra de progresso indica o andamento da entrevista.
+**Afinidades técnicas — 13 perguntas:**
 
-![Pergunta sobre atividades profissionais de maior interesse](pacote_readme_imagens/imagens/pergunta_02.png)
+![Pergunta de afinidade técnica, com escala de interesse](imagens/afinidades_tecnicas.png)
 
 <details>
-<summary><strong>Ver as capturas das dez perguntas do questionário</strong></summary>
+<summary><strong>Ver também: objetivos profissionais e restrições</strong></summary>
 
-As imagens abaixo mostram as dez dimensões avaliadas pelo sistema. As alternativas selecionadas são ilustrativas de uma execução de teste.
+**Objetivos profissionais — 8 perguntas:**
 
-#### P1 — Afinidade com matemática e estatística
+![Pergunta sobre objetivos profissionais](imagens/objetivos_profissionais.png)
 
-![P1 — Afinidade com matemática e estatística](pacote_readme_imagens/imagens/pergunta_01.png)
+**Atividades que prefere evitar — 8 opções:**
 
-#### P2 — Atividades profissionais de interesse
-
-![P2 — Atividades profissionais de interesse](pacote_readme_imagens/imagens/pergunta_02.png)
-
-#### P3 — Linguagens e ferramentas
-
-![P3 — Linguagens e ferramentas](pacote_readme_imagens/imagens/pergunta_03.png)
-
-#### P4 — Resultados desejados no trabalho
-
-![P4 — Resultados desejados no trabalho](pacote_readme_imagens/imagens/pergunta_04.png)
-
-#### P5 — Abordagem para resolver problemas
-
-![P5 — Abordagem para resolver problemas](pacote_readme_imagens/imagens/pergunta_05.png)
-
-#### P6 — Infraestrutura e segurança
-
-![P6 — Infraestrutura e segurança](pacote_readme_imagens/imagens/pergunta_06.png)
-
-#### P7 — Dados e inteligência artificial
-
-![P7 — Dados e inteligência artificial](pacote_readme_imagens/imagens/pergunta_07.png)
-
-#### P8 — Desenvolvimento de aplicações
-
-![P8 — Desenvolvimento de aplicações](pacote_readme_imagens/imagens/pergunta_08.png)
-
-#### P9 — Qualidade e testes de software
-
-![P9 — Qualidade e testes de software](pacote_readme_imagens/imagens/pergunta_09.png)
-
-#### P10 — Objetivos profissionais
-
-![P10 — Objetivos profissionais](pacote_readme_imagens/imagens/pergunta_10.png)
+![Lista de restrições de atividades de trabalho](imagens/restricoes_atividades.png)
 
 </details>
 
-### Recomendação de carreira
+**Perfil registrado:** ao finalizar as respostas, a aplicação apresenta um resumo e permite revisar cada grupo antes de calcular o ranking.
 
-Após concluir as perguntas, o sistema exibe a carreira recomendada, sua pontuação e as regras que contribuíram para o resultado.
+![Resumo do perfil registrado e botão para calcular Top 3](imagens/perfil_registrado.png)
 
-No exemplo abaixo, o sistema recomenda **Engenharia de Qualidade e Testes (QA)**, com três pontos decorrentes da regra R09.
+### 3. Recomendação das três carreiras mais compatíveis
 
-![Recomendação de QA com pontuação e justificativa da regra R09](pacote_readme_imagens/imagens/resultado_qa.png)
+O sistema apresenta as três carreiras classificadas, seus índices de compatibilidade e uma explicação acessível para os resultados. A imagem mostra **um exemplo de execução**, e não uma recomendação fixa do projeto.
 
-### Comparação de pontuações
+![Exemplo de ranking Top 3 com percentuais de compatibilidade](imagens/ranking_top3.png)
 
-O painel de comparação apresenta os pontos obtidos pelas dez carreiras para a entrevista realizada.
+O detalhamento mostra os componentes usados no cálculo, as afinidades e objetivos com maior contribuição e eventuais penalidades.
 
-Essa funcionalidade permite visualizar a classificação das carreiras conforme as respostas fornecidas.
+![Detalhamento dos fatores e cálculos de uma recomendação](imagens/detalhamento_resultado.png)
 
-![Tabela de pontuação das dez carreiras](pacote_readme_imagens/imagens/comparacao_pontuacoes.png)
+### 4. Avaliação de competências
 
-### Rastreabilidade das regras
+A pessoa escolhe uma das carreiras do Top 3 e informa seu nível atual em **cinco competências específicas**. A escala vai de **0 (nenhum conhecimento)** a **3 (conhecimento prático)**, com opção de resposta desconhecida. Essa avaliação **não modifica a classificação do Top 3**.
 
-O sistema permite consultar as regras efetivamente ativadas e os motivos associados a cada uma.
+![Avaliação técnica da carreira de Engenharia de Qualidade e Testes](imagens/avaliacao_competencias.png)
 
-Essa funcionalidade torna a recomendação transparente, permitindo compreender quais combinações de respostas contribuíram para a pontuação.
+### 5. Lacunas e trilha de aprendizagem personalizada
 
-![Detalhamento das regras ativadas no resultado](pacote_readme_imagens/imagens/regras_ativadas.png)
+O sistema compara o nível autodeclarado com os níveis de referência Júnior. No exemplo, **Testes de API** é a única competência abaixo do parâmetro da base, portanto é priorizada na trilha.
 
-### Conferência das respostas
+![Resumo das lacunas de competências e comparação com a referência Júnior](imagens/comparacao_lacunas.png)
 
-Também é possível visualizar as respostas registradas e, se necessário, retornar ao questionário para revisá-las ou iniciar uma nova entrevista.
+A trilha é organizada em quatro partes:
 
-![Conferência das respostas do questionário](pacote_readme_imagens/imagens/respostas_registradas.png)
+1. **Fundamentos:** conteúdos de base e pré-requisitos das competências com lacuna.
+2. **Desenvolvimento técnico:** práticas e tecnologias para aprofundar os conhecimentos necessários.
+3. **Projeto para portfólio:** aplicação integradora com entregáveis e evidências de aprendizagem.
+4. **Consolidação e próximos passos:** revisão, documentação dos resultados e certificações opcionais.
 
-### Resolução de empates
+![Fundamentos, desenvolvimento técnico e projeto de portfólio no roadmap](imagens/roadmap_fundamentos_e_portfolio.png)
 
-O sistema possui mecanismos para resolver situações em que duas ou mais carreiras recebem a mesma pontuação.
+![Consolidação, documentação e certificações opcionais do roadmap](imagens/roadmap_consolidacao.png)
 
-Inicialmente, é considerada a afinidade com a linguagem ou ferramenta indicada na **Pergunta 3**.
-
-Caso esse critério não seja suficiente para identificar uma única carreira, o sistema apresenta uma **pergunta adicional**, permitindo ao usuário indicar qual atividade profissional prefere realizar.
-
-O exemplo a seguir demonstra um empate entre **Ciência de Dados e Machine Learning** e **Engenharia de Qualidade e Testes (QA)**, ambas com três pontos.
-
-#### Pergunta adicional de desempate
-
-Como as duas carreiras receberam pontuações iguais e o critério da Pergunta 3 não resolveu o empate, o sistema solicita ao usuário uma preferência entre as atividades correspondentes.
-
-![Pergunta adicional para desempate entre Ciência de Dados e QA](pacote_readme_imagens/imagens/pergunta_desempate.png)
-
-#### Recomendação final após o desempate
-
-Nesse exemplo, o usuário selecionou a atividade relacionada a testes de software.
-
-O sistema recomendou **Engenharia de Qualidade e Testes (QA)**, mantendo a pontuação de três pontos e informando que a escolha adicional foi utilizada para definir a recomendação.
-
-O desempate não acrescenta pontos às carreiras: ele apenas determina a recomendação entre as candidatas empatadas.
-
-![Resultado final após desempate com recomendação de QA](pacote_readme_imagens/imagens/recomendacao_pos_desempate.png)
-
-#### Regras ativadas no cenário de empate
-
-O sistema permite consultar as regras que contribuíram para a pontuação das carreiras envolvidas:
-
-- **R03 — Ciência de Dados e Machine Learning (+3 pontos):** afinidade com matemática e interesse em modelos de inteligência artificial.
-- **R09 — Engenharia de Qualidade e Testes (QA) (+3 pontos):** interesse em testes, investigação de defeitos e qualidade de software.
-
-A imagem abaixo demonstra que ambas as regras foram ativadas, justificando a necessidade do desempate.
-
-![Regras R03 e R09 ativadas no cenário de desempate](pacote_readme_imagens/imagens/regras_desempate.png)
-
-## Trilhas de carreira
+## Carreiras contempladas
 
 1. Desenvolvimento Back-end
 2. Desenvolvimento Front-end e UI/UX
@@ -162,143 +100,128 @@ A imagem abaixo demonstra que ambas as regras foram ativadas, justificando a nec
 9. Engenharia de Qualidade e Testes (QA)
 10. Gestão de Produtos Digitais
 
-## Tecnologias e ambiente
+## Como funciona o motor de inferência
 
-- **Python** — versão utilizada no desenvolvimento: **3.12.3**.
-- **Experta 1.9.4** — motor de regras e encadeamento para frente.
-- **frozendict 1.2** — dependência compatível com a configuração utilizada pelo Experta neste projeto.
-- **Streamlit 1.66.0** — interface web.
-- **Git e GitHub** — versionamento do código.
+O sistema utiliza **regras e pesos explícitos**, não um modelo de aprendizado de máquina treinado com dados de candidatos. A base `regras_carreiras.json` contém as dimensões, pesos, restrições, penalidades, competências e conteúdos de aprendizagem; o arquivo `motor_ponderado.py` executa os cálculos.
 
-O arquivo `motor_inferencia.py` contém um ajuste de compatibilidade para executar o Experta no ambiente Python 3.12 utilizado no desenvolvimento.
+**1. Afinidades e objetivos.** As notas de 1 a 5 são normalizadas para a escala de 0 a 100 e combinadas em médias ponderadas específicas para cada carreira.
 
-## Como instalar e executar
+**2. Cobertura das respostas.** Respostas “não consigo avaliar” não são tratadas como nota mínima. Para uma carreira receber um percentual definitivo, é preciso alcançar **pelo menos 70% de cobertura ponderada nas afinidades e 70% nos objetivos**, separadamente.
 
-As instruções abaixo utilizam **Windows PowerShell**. É necessário possuir Python instalado e acesso aos arquivos do repositório.
+**3. Compatibilidade inicial.** O modelo combina **80% de afinidades técnicas e 20% de objetivos profissionais**:
 
-Se o repositório estiver privado, o usuário precisará ter permissão para cloná-lo.
-
-### 1. Obter o projeto
-
-```powershell
-git clone https://github.com/anabmaia76/consultor-carreiras-ti.git
-cd consultor-carreiras-ti
+```text
+Compatibilidade inicial = 0,80 × Afinidade ponderada + 0,20 × Objetivos ponderados
 ```
 
-Se o projeto já estiver disponível no computador, basta abrir o terminal na pasta `consultor-carreiras-ti`.
+**4. Penalidades por restrições.** Uma restrição selecionada gera desconto de **8 pontos percentuais** quando corresponde a atividade principal da carreira, ou **4 pontos percentuais** quando corresponde a atividade complementar. A soma é limitada a **16 pontos percentuais por carreira**; nenhuma carreira é automaticamente excluída.
 
-### 2. Criar o ambiente virtual
+```text
+Compatibilidade final = limitar(Compatibilidade inicial − Penalidades, 0, 100)
+```
 
-Com o Python 3.12 instalado:
+**5. Explicações e ranking.** O motor classifica as carreiras elegíveis e apresenta o Top 3 com detalhamento dos componentes e das restrições aplicadas. Possíveis contradições são submetidas à confirmação do usuário antes de mostrar o resultado.
+
+**6. Lacunas técnicas.** Após a escolha de uma carreira, cada uma das cinco competências é comparada com sua referência:
+
+```text
+Lacuna = máximo(0, Nível de referência Júnior − Nível atual)
+```
+
+O roadmap prioriza lacunas identificadas e seus pré-requisitos. Competências não avaliadas não são tratadas como nível zero; nesse caso, a avaliação precisa ser completada antes de gerar o roadmap definitivo.
+
+> Para a descrição integral das regras, pesos, critérios de desempate, verificações de contradição, competências e exemplos de cálculo, consulte a **[Matriz de Decisão e Engenharia do Conhecimento](../Downloads/matriz_decisao.md)**.
+
+## Tecnologias utilizadas
+
+- **Python 3.12.3** — linguagem utilizada no desenvolvimento.
+- **Streamlit 1.66.0** — interface web interativa.
+- **JSON** — base de conhecimento externa e configurável.
+- **`unittest`** — testes automatizados, disponível na biblioteca padrão do Python.
+- **Git e GitHub** — versionamento do projeto.
+
+O projeto **não utiliza Experta nem frozendict** na versão atual; o mecanismo de inferência ponderada está implementado em Python.
+
+## Instalação e execução
+
+Exemplo para **Windows PowerShell**, com Python 3.12 e Git instalados. Se o repositório for privado, é preciso ter permissão para acessá-lo.
+
+**1. Clonar o repositório:**
+
+```powershell
+git clone https://github.com/anabmaia76/consultor-carreiras-ti-etapa-2.git
+cd consultor-carreiras-ti-etapa-2
+```
+
+**2. Criar o ambiente virtual:**
 
 ```powershell
 py -3.12 -m venv .venv
 ```
 
-Os próximos comandos chamam diretamente o Python do ambiente virtual, sem exigir a ativação do ambiente no PowerShell.
-
-### 3. Instalar as dependências
-
-As versões das bibliotecas estão definidas no arquivo `requirements.txt`.
+**3. Instalar as dependências:**
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-### 4. Iniciar o sistema
+**4. Iniciar a aplicação:**
 
 ```powershell
 .\.venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-Acesse o endereço exibido pelo Streamlit no terminal, normalmente:
+Abra o endereço mostrado no terminal, geralmente **http://localhost:8501**. Para encerrar o servidor, pressione **Ctrl + C** no terminal.
 
-`http://localhost:8501`
-
-Para interromper o servidor no terminal, utilize **Ctrl + C**.
-
-## Como o sistema decide
-
-1. O usuário responde às dez perguntas sobre preferências e afinidades profissionais.
-2. As respostas são declaradas como fatos no motor Experta.
-3. As regras cujas condições são atendidas são ativadas e registradas com seus motivos.
-4. Cada carreira acumula os pontos das regras: **até 5 pontos** dessa parcela.
-5. A resposta à **Pergunta 4** acrescenta **1 ponto** à carreira correspondente, totalizando um máximo de **6 pontos por carreira**.
-6. A carreira com maior pontuação é recomendada. Se houver empate, o sistema considera a **Pergunta 3**; caso isso não resulte em uma única candidata, solicita uma **atividade adicional de preferência**.
-7. O desempate **não acrescenta pontos**: ele apenas define a recomendação entre carreiras empatadas.
-
-As regras, as condições de ativação e os exemplos de aplicação estão descritos em **[Matriz de Decisão](matriz_decisao.md)**.
-
-## Organização dos arquivos
+## Estrutura do projeto
 
 ```text
-consultor-carreiras-ti/
+consultor-carreiras-ti-etapa-2/
 ├── .gitignore
-├── app.py                    # Interface Streamlit e exibição das recomendações
-├── motor_inferencia.py       # Fatos, 25 regras, pontuação e desempates
-├── perguntas.py              # Enunciados e alternativas do questionário
-├── matriz_decisao.md         # Tabela das regras e critérios de decisão
-├── pacote_readme_imagens/
-│   └── imagens/              # Capturas de tela utilizadas no README
-│       ├── tela_inicial.png
-│       ├── pergunta_01.png
-│       ├── pergunta_02.png
-│       ├── pergunta_03.png
-│       ├── pergunta_04.png
-│       ├── pergunta_05.png
-│       ├── pergunta_06.png
-│       ├── pergunta_07.png
-│       ├── pergunta_08.png
-│       ├── pergunta_09.png
-│       ├── pergunta_10.png
-│       ├── resultado_qa.png
-│       ├── comparacao_pontuacoes.png
-│       ├── regras_ativadas.png
-│       ├── respostas_registradas.png
-│       ├── pergunta_desempate.png
-│       ├── recomendacao_pos_desempate.png
-│       └── regras_desempate.png
-├── teste_experta.py          # Verificação básica do Experta
-├── teste_integrado.py        # Validação de perfis para as dez carreiras
-├── teste_conflitos.py        # Cenários de empate e desempate
-├── requirements.txt          # Dependências para instalação do projeto
-└── README.md                 # Documentação do projeto
+├── app.py                   # Interface e navegação em Streamlit
+├── motor_ponderado.py       # Cálculo ponderado, Top 3, lacunas e roadmap
+├── regras_carreiras.json    # Base de conhecimento versão 0.3.0
+├── matriz_decisao.md        # Regras de decisão e documentação técnica
+├── teste.py                 # Suíte com 50 testes automatizados
+├── requirements.txt         # Dependências necessárias
+├── imagens/                 # Capturas reais da versão atual
+│   ├── tela_inicial.png
+│   ├── afinidades_tecnicas.png
+│   ├── objetivos_profissionais.png
+│   ├── restricoes_atividades.png
+│   ├── perfil_registrado.png
+│   ├── ranking_top3.png
+│   ├── detalhamento_resultado.png
+│   ├── avaliacao_competencias.png
+│   ├── comparacao_lacunas.png
+│   ├── roadmap_fundamentos_e_portfolio.png
+│   └── roadmap_consolidacao.png
+└── README.md                # Apresentação e instruções do projeto
 ```
 
-A pasta `.venv` é criada localmente e não deve ser versionada.
+A pasta `.venv/` é criada localmente e não deve ser versionada.
 
-## Como executar os testes
+## Testes automatizados
 
-A partir da pasta principal do projeto, após instalar as dependências:
-
-**Regras individuais e funções do motor:**
+Na pasta principal do projeto, com o ambiente virtual criado e as dependências instaladas, execute:
 
 ```powershell
-.\.venv\Scripts\python.exe motor_inferencia.py
+.\.venv\Scripts\python.exe teste.py
 ```
 
-**Perfis integrados das dez carreiras:**
+Na verificação final realizada durante o desenvolvimento, **os 50 testes foram aprovados**. A suíte aborda carregamento e validação do JSON, entradas inválidas, médias ponderadas, cobertura mínima, penalidades, contradições, Top 3, lacunas e geração de roadmaps. Também foram realizadas conferências manuais da navegação e apresentação das telas no Streamlit.
 
-```powershell
-.\.venv\Scripts\python.exe teste_integrado.py
-```
+A aprovação dos testes comprova os comportamentos cobertos pela suíte; **não equivale à validação estatística das recomendações para diferentes populações**.
 
-**Conflitos, empates e desempates:**
+## Limitações
 
-```powershell
-.\.venv\Scripts\python.exe teste_conflitos.py
-```
-
-Nos testes realizados durante o desenvolvimento, foram aprovados **45 cenários individuais de regras**, **dez perfis de carreira** e **três cenários de conflito**.
-
-Também foram testados, pela interface web, uma recomendação direta, um desempate por ferramenta, um desempate por pergunta adicional e a aplicação do limite de pontuação.
-
-Esses testes mostram o comportamento do sistema nos casos avaliados; não representam validação estatística de recomendações para toda a população.
+- As recomendações dependem das respostas autodeclaradas e dos pesos definidos no protótipo.
+- Os percentuais são índices internos de compatibilidade; não medem empregabilidade nem substituem orientação profissional individualizada.
+- As referências Júnior são parâmetros de aprendizagem, e não exigências obrigatórias de todas as empresas.
+- Cursos, tecnologias e certificações podem mudar; consulte as fontes oficiais antes de escolher uma formação.
 
 ## Contexto acadêmico
 
-Projeto desenvolvido para a disciplina de **Inteligência Artificial**, do curso de **Ciência da Computação**, no **Centro Universitário Presidente Antônio Carlos (UNIPAC), Barbacena**.
+Projeto desenvolvido para a disciplina de **Inteligência Artificial**, do curso de **Ciência da Computação**, no **Centro Universitário Presidente Antônio Carlos (UNIPAC), Barbacena (MG)**.
 
-A matriz de decisão documenta as regras escolhidas para este protótipo de Sistema Especialista.
-
-A ferramenta foi concebida para **exploração de interesses de carreira**, não para substituir orientação profissional individualizada.
+A aplicação foi concebida para apoiar a exploração de interesses de carreira e demonstrar a aplicação de uma **base de conhecimento explícita, regras de inferência, cálculos ponderados e explicabilidade** em um sistema de orientação profissional.
