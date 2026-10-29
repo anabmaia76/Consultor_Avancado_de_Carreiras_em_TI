@@ -193,7 +193,7 @@ class TestesConsultorCarreiras(unittest.TestCase):
         with self.assertRaises(ValueError):
             motor.calcular_afinidade_ponderada(self.base, "carreira_inexistente", {})
 
-        def test_20_as_23_regras_de_penalidade_individualmente(self):
+    def test_20_as_23_regras_de_penalidade_individualmente(self):
         for regra in self.base["penalidades_logicas"]:
             with self.subTest(carreira=regra["carreira"], restricao=regra["restricao"]):
                 r = motor.calcular_penalidades(self.base, regra["carreira"], [regra["restricao"]])
